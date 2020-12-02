@@ -27,26 +27,26 @@ void DayOne(const Input& in) {
 	auto start = std::chrono::high_resolution_clock::now();
 	int res = Day1::PartA(in.idata);
 	auto end = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
-	std::cout << "Part A: " << res <<" found after " << duration << "ns\n";
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
 	res = Day1::PartB(in.idata);
 	end = std::chrono::high_resolution_clock::now();
-	duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-	std::cout << "Part B: " << res <<" found after " << duration << "ms\n";
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
 void DayTwo(const Input& in) {
 	auto start = std::chrono::high_resolution_clock::now();
 	int res = Day2::PartA(in.sdata);
 	auto end = std::chrono::high_resolution_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-	std::cout << "Part A: " << res <<" found after " << duration << "ms\n";
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
 	res = Day2::PartB(in.sdata);
 	end = std::chrono::high_resolution_clock::now();
-	duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
-	std::cout << "Part B: " << res <<" found after " << duration << "ms\n";
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
