@@ -7,20 +7,25 @@
 #include <string>
 #include <utility>
 
-enum Mode {STRING, INTEGER, DOUBLE };
-
+/**
+ * This struct provides a simple and easy wrapper to import the contents of a file into
+ * a std::vector. The ctor accepts one parameter and one optional parameter
+ * Params: string to the path, (optional) char which delimiter to use
+ * 
+ * After calling the ctor, the public member data is accessible
+ */
+template <typename T>
 struct Input {
-	std::vector<std::string> sdata;
-	std::vector<int> idata;
-	std::vector<double> ddata;
-	Input(std::string path, char delim = ' ', Mode mode = Mode::STRING) {
+	std::vector<T> data;
+	Input(const std::string& path, char delim = ' ') {
 		try {
 			std::ifstream infile(path);
-			std::string l;
-			while(std::getline(infile, l, delim)) {
-				if (mode == Mode::STRING)    sdata.push_back(l);
-				if (mode == Mode::INTEGER)   idata.push_back(std::stoi(l));
-				if (mode == Mode::DOUBLE)    ddata.push_back(std::stod(l));
+			std::string line;
+			while(std::getline(infile, line, delim)) {
+				T element;
+				std::stringstream input(line);
+				while(input >> element)
+					data.push_back(element);
 			}
 		} catch (...) {
 			std::cout << "An error occured!\n";
