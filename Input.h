@@ -31,6 +31,12 @@ struct Input {
 			std::cout << "An error occured!\n";
 		}
 	}
+
+	void PrintElements() const {
+		for (const auto& e : data) {
+			std::cout << e << "===\n";
+		}
+	}
 };
 
 #endif
