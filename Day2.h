@@ -54,12 +54,7 @@ namespace Day2
 				} else if (str.find(':') != std::string::npos) {
 					req = str[0];
 				} else {
-					if(str[first] == req && str[second] != req) {
-						valid++;
-					}
-					if(str[first] != req && str[second] == req) {
-						valid++;
-					}
+					if(str[first] == req ^ str[second] == req) valid++;
 				}
 			}
 		}
