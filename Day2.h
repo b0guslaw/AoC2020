@@ -50,7 +50,7 @@ namespace Day2
 				if (str.find('-') != std::string::npos) {
 					pos = str.find('-');
 					first = std::stoi(str.substr(0, s.find('-'))) - 1;
-					second = std::abs(std::stoi(str.substr(pos, str.size() - 1))) - 1;
+					second = std::stoi(str.substr(pos+1, str.size() - 1)) - 1;
 				} else if (str.find(':') != std::string::npos) {
 					req = str[0];
 				} else {
