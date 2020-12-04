@@ -6,10 +6,12 @@
 #include "Day1.h"
 #include "Day2.h"
 #include "Day3.h"
+#include "Day4.h"
 
 void DayOne(const Input<int>&);
 void DayTwo(const Input<std::string>&);
 void DayThree(const Input<std::string>&);
+void DayFour();
 
 int main()
 {
@@ -27,6 +29,10 @@ int main()
 		std::cout << "\n\tDay 3\n";
 		Input<std::string> in("PuzzleInput/Day3Input.txt");
 		DayThree(in);
+	}
+	{
+		std::cout << "\tDay 4\n";
+		DayFour();
 	}
 }
 
@@ -67,6 +73,38 @@ void DayThree(const Input<std::string>& in) {
 
 	start = std::chrono::high_resolution_clock::now();
 	res = Day3::PartB(in.data);
+	end = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+}
+
+void DayFour() {
+	std::ifstream infile("PuzzleInput/Day4Input.txt");
+
+	std::vector<std::string> data;
+	std::string passport;
+
+	for(std::string line; std::getline(infile, line); ) {
+		if (line.empty()) {
+			data.push_back(passport);
+			passport.clear();
+		}
+		if (infile.eof()) {
+			passport += line;
+			data.push_back(passport);
+		}
+		passport += line;
+		passport += " ";
+	}
+
+	auto start = std::chrono::high_resolution_clock::now();
+	unsigned long long int res = Day4::PartA(data);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
+
+	start = std::chrono::high_resolution_clock::now();
+	res = Day4::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
