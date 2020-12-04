@@ -4,14 +4,15 @@
 #include <regex>
 #include <vector>
 #include <iostream>
+#include <future>
+#include <thread>
 
 namespace Day4
 {
-	bool isValid(const std::string& passport) {
+	bool isValid(const std::string& passport, int i) {
 		std::istringstream iss(passport);
 		std::string field;
 		int tracker = 0;
-
 		while (iss >> field) {
 			const auto& key = field.substr(0, field.find(":"));
 			const auto& value = field.substr(field.find(":") + 1, field.length());
@@ -66,16 +67,20 @@ namespace Day4
 		for (const auto& passport : data) {
 			if (std::distance(
 						std::sregex_iterator(passport.begin(),
-						passport.end(), regex), std::sregex_iterator()) == 7)
-							valid++;
+						passport.end(), regex), std::sregex_iterator()) == 7) valid++;
 		}
 		return valid;
 	}
 
 	int PartB(const std::vector<std::string>& data) {
 		int valid = 0;
-		for (const auto& passport : data) {
-			if (isValid(passport)) valid++;
+		std::vector<std::future<bool>> future;
+		for (size_t i = 0; i < data.size(); i++) {
+			future.push_back(std::async(isValid, data[i], i));
+		}
+
+		for (auto& f : future) {
+			valid += f.get();
 		}
 		return valid;
 	}

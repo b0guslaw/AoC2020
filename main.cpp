@@ -84,7 +84,7 @@ void DayFour() {
 	std::vector<std::string> data;
 	std::string passport;
 
-	for(std::string line; std::getline(infile, line); ) {
+	for (std::string line; std::getline(infile, line); ) {
 		if (line.empty()) {
 			data.push_back(passport);
 			passport.clear();
