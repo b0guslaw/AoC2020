@@ -48,7 +48,7 @@ namespace Day5
 
 	int PartB(const std::vector<std::string>& data) {
 		std::set<int> passes;
-		for (auto d : data) passes.emplace(passID(d));
+		for (const auto& d : data) passes.emplace(passID(d));
 		int missing = *passes.begin();
 		for (auto it = passes.begin(); it != passes.end(); ++it, ++missing)
 			if(*it != missing) return missing;	
