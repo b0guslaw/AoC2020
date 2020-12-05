@@ -7,11 +7,13 @@
 #include "Day2.h"
 #include "Day3.h"
 #include "Day4.h"
+#include "Day5.h"
 
 void DayOne(const Input<int>&);
 void DayTwo(const Input<std::string>&);
 void DayThree(const Input<std::string>&);
 void DayFour();
+void DayFive(const Input<std::string>&);
 
 int main()
 {
@@ -33,6 +35,12 @@ int main()
 	{
 		std::cout << "\tDay 4\n";
 		DayFour();
+	}
+	{
+		std::cout << "\tDay 5\n";
+		Input<std::string> in("PuzzleInput/Day5Input.txt", '\0');
+		DayFive(in);
+
 	}
 }
 
@@ -105,6 +113,20 @@ void DayFour() {
 
 	start = std::chrono::high_resolution_clock::now();
 	res = Day4::PartB(data);
+	end = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+}
+
+void DayFive(const Input<std::string>& in) {
+	auto start = std::chrono::high_resolution_clock::now();
+	unsigned long long int res = Day5::PartA(in.data);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
+
+	start = std::chrono::high_resolution_clock::now();
+	res = Day5::PartB(in.data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
