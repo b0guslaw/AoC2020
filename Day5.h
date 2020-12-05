@@ -47,13 +47,11 @@ namespace Day5
 	}
 
 	int PartB(const std::vector<std::string>& data) {
-		std::vector<int> passes;
-		for (auto d : data) passes.push_back(passID(d));
-		std::sort(passes.begin(), passes.end());
-		for (int i = 1; i < passes.size(); i++) {
-			if (passes[i] - passes[i - 1] != 1)
-				return passes[i] - 1;
-		}		
+		std::set<int> passes;
+		for (auto d : data) passes.emplace(passID(d));
+		int missing = *passes.begin();
+		for (auto it = passes.begin(); it != passes.end(); ++it, ++missing)
+			if(*it != missing) return missing;	
 		return 0;
 	}
 }
