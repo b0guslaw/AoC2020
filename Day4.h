@@ -6,10 +6,23 @@
 #include <iostream>
 #include <future>
 #include <thread>
+#include <algorithm>
 
 namespace Day4
 {
-	bool isValid(const std::string& passport, int i) {
+	bool countFields(const std::string& passport) {
+		std::istringstream iss(passport);
+		std::string field;
+		int tracker = 0;
+		while (iss >> field) {
+			const auto& key = field.substr(0, field.find(":"));
+			if (key == "byr" || key == "iyr" || key == "eyr" || key == "hgt" ||
+				key == "hcl" || key == "ecl" || key == "pid") tracker++;
+		}
+		return tracker == 7;
+	}
+
+	bool isValid(const std::string& passport) {
 		std::istringstream iss(passport);
 		std::string field;
 		int tracker = 0;
@@ -39,19 +52,19 @@ namespace Day4
 				}
 			}
 			if (key == "hcl") {
-				std::regex regex("^#(?:[0-9a-f]{6})$");
-				if (std::regex_search(value, regex)) tracker++;
+				if (value.length() != 7 || value[0] != '#') return false;
+				if (std::all_of(value.begin() + 1, value.end(), [](const char& c){
+					return (48 <= c && c <= 57) || (97 <= c && c <= 102);
+				})) {
+						tracker++;
+					}
 				else return false;
 			}
 			if (key == "ecl") {
-				std::regex regex("(amb)|(blu)|(brn)|(gry)|(grn)|(hzl)|(oth)");
-				if (std::distance(
-						std::sregex_iterator(value.begin(),
-						value.end(), regex), std::sregex_iterator()) == 1) {
-							tracker++;
-						} else {
-							return false;
-						}
+				if (value == "amb" || value == "blu" 
+					|| value == "brn" || value == "gry" || 
+					value == "grn" || value == "hzl" || value == "oth") tracker++;
+				else return false;
 			}
 			if (key == "pid") {
 				if (value.length() == 9) tracker++;
@@ -63,27 +76,18 @@ namespace Day4
 
 	int PartA(const std::vector<std::string>& data) {
 		int valid = 0;
-		std::regex regex("(byr)|(iyr)|(eyr)|(hgt)|(hcl)|(ecl)|(pid)");
 		for (const auto& passport : data) {
-			if (std::distance(
-						std::sregex_iterator(passport.begin(),
-						passport.end(), regex), std::sregex_iterator()) == 7) valid++;
+			valid += countFields(passport);
 		}
 		return valid;
 	}
 
 	int PartB(const std::vector<std::string>& data) {
 		int valid = 0;
-		std::vector<std::future<bool>> future;
-		for (size_t i = 0; i < data.size(); i++) {
-			future.push_back(std::async(isValid, data[i], i));
-		}
-
-		for (auto& f : future) {
-			valid += f.get();
-		}
+		for (const auto& passport : data) valid += isValid(passport);
 		return valid;
 	}
+
 }
 
 #endif
