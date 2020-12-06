@@ -11,38 +11,34 @@
 #include "Day5.h"
 #include "Day6.h"
 
-void DayOne(const Input<int>&);
-void DayTwo(const Input<std::string>&);
-void DayThree(const Input<std::string>&);
-void DayFour();
-void DayFive(const Input<std::string>&);
+void DayOne(const std::string);
+void DayTwo(const std::string);
+void DayThree(const std::string);
+void DayFour(const std::string);
+void DayFive(const std::string);
 void DaySix(const std::string&);
 
 int main()
 {
 	{
 		std::cout << "\tDay 1\n";
-		Input<int> in("PuzzleInput/Day1Input.txt", '\n');
-		DayOne(in);
+		DayOne("PuzzleInput/Day1Input.txt");
 	}
 	{
 		std::cout << "\n\tDay 2\n";
-		Input<std::string> in("PuzzleInput/Day2Input.txt");
-		DayTwo(in);
+		DayTwo("PuzzleInput/Day2Input.txt");
 	}
 	{
 		std::cout << "\n\tDay 3\n";
-		Input<std::string> in("PuzzleInput/Day3Input.txt");
-		DayThree(in);
+		DayThree("PuzzleInput/Day3Input.txt");
 	}
 	{
 		std::cout << "\n\tDay 4\n";
-		DayFour();
+		DayFour("PuzzleInput/Day4Input.txt");
 	}
 	{
 		std::cout << "\n\tDay 5\n";
-		Input<std::string> in("PuzzleInput/Day5Input.txt", '\0');
-		DayFive(in);
+		DayFive("PuzzleInput/Day5Input.txt");
 	}
 	{
 		std::cout << "\n\tDay 6\n";
@@ -50,67 +46,53 @@ int main()
 	}
 }
 
-void DayOne(const Input<int>& in) {
+void DayOne(const std::string path) {
+	std::vector<int> data = Input::GetData<int>(path, '\n');
 	auto start = std::chrono::high_resolution_clock::now();
-	int res = Day1::PartA(in.data);
+	int res = Day1::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
-	res = Day1::PartB(in.data);
+	res = Day1::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
-void DayTwo(const Input<std::string>& in) {
+void DayTwo(const std::string path) {
+	std::vector<std::string> data = Input::GetData<std::string>(path, '\n');
 	auto start = std::chrono::high_resolution_clock::now();
-	int res = Day2::PartA(in.data);
+	int res = Day2::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
-	res = Day2::PartB(in.data);
+	res = Day2::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
-void DayThree(const Input<std::string>& in) {
+void DayThree(const std::string path) {
+	std::vector<std::string> data = Input::GetData<std::string>(path);
 	auto start = std::chrono::high_resolution_clock::now();
-	unsigned long long int res = Day3::PartA(in.data);
+	unsigned long long int res = Day3::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
-	res = Day3::PartB(in.data);
+	res = Day3::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
-void DayFour() {
-	std::ifstream infile("PuzzleInput/Day4Input.txt");
-
-	std::vector<std::string> data;
-	std::string passport;
-
-	for (std::string line; std::getline(infile, line); ) {
-		if (line.empty()) {
-			data.push_back(passport);
-			passport.clear();
-		}
-		if (infile.eof()) {
-			passport += line;
-			data.push_back(passport);
-		}
-		passport += line;
-		passport += " ";
-	}
-
+void DayFour(const std::string path) {
+	std::vector<std::string> data = Input::GetEmptyNewLineData(path);
 	auto start = std::chrono::high_resolution_clock::now();
 	unsigned long long int res = Day4::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
@@ -124,40 +106,23 @@ void DayFour() {
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
-void DayFive(const Input<std::string>& in) {
+void DayFive(const std::string path) {
+	std::vector<std::string> data = Input::GetData<std::string>(path);
 	auto start = std::chrono::high_resolution_clock::now();
-	unsigned long long int res = Day5::PartA(in.data);
+	unsigned long long int res = Day5::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
 
 	start = std::chrono::high_resolution_clock::now();
-	res = Day5::PartB(in.data);
+	res = Day5::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
 void DaySix(const std::string& path) {
-	std::ifstream infile("PuzzleInput/Day6Input.txt");
-
-	std::string answer;
-	std::vector<std::string> data;
-
-	for(std::string line; std::getline(infile, line); ) {
-		if (line.empty()) {
-			data.push_back(answer);
-			answer.clear();
-		}
-		if (infile.eof()) {
-			answer += line;
-			data.push_back(answer);
-		}
-		answer += line;
-		answer += " ";
-	}
-
-	std::cout << "\n";
+	std::vector<std::string> data = Input::GetEmptyNewLineData("PuzzleInput/Day6Input.txt");
 	auto start = std::chrono::high_resolution_clock::now();
 	unsigned long long int res = Day6::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();

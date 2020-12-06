@@ -14,10 +14,13 @@
  * 
  * After calling the ctor, the public member data is accessible
  */
-template <typename T>
-struct Input {
-	std::vector<T> data;
-	Input(const std::string& path, char delim = ' ') {
+
+namespace Input
+{
+	template<typename T>
+	std::vector<T> GetData(const std::string& path, char delim = ' ')
+	{
+		std::vector<T> data;
 		try {
 			std::ifstream infile(path);
 			std::string line;
@@ -30,12 +33,28 @@ struct Input {
 		} catch (...) {
 			std::cout << "An error occured!\n";
 		}
+		return data;
 	}
 
-	void PrintElements() const {
-		for (const auto& e : data) {
-			std::cout << e << "===\n";
+	std::vector<std::string> GetEmptyNewLineData(const std::string& path)
+	{
+	std::ifstream infile(path);
+	std::string temp;
+	std::vector<std::string> data;
+
+	for(std::string line; std::getline(infile, line); ) {
+		if (line.empty()) {
+			data.push_back(temp);
+			temp.clear();
 		}
+		if (infile.eof()) {
+			temp += line;
+			data.push_back(temp);
+		}
+		temp += line;
+		temp += " ";
+	}
+	return data;
 	}
 };
 
