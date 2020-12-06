@@ -34,7 +34,7 @@ namespace Day5
 			}
 			if (boardingpass[9] == 'R') col = chigh;
 			if (boardingpass[9] == 'L') col = clow;
-			return row * 8 + col;
+			return row << 3 | col;
 	}
 
 	int PartA(const std::vector<std::string>& data) {
@@ -51,7 +51,7 @@ namespace Day5
 		for (const auto& d : data) passes.emplace(passID(d));
 		int missing = *passes.begin();
 		for (auto it = passes.begin(); it != passes.end(); ++it, ++missing)
-			if(*it != missing) return missing;	
+			if(*it != missing) return missing;
 		return 0;
 	}
 }

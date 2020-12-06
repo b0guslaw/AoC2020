@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <sstream>
 
 #include "Input.h"
 
@@ -8,12 +9,14 @@
 #include "Day3.h"
 #include "Day4.h"
 #include "Day5.h"
+#include "Day6.h"
 
 void DayOne(const Input<int>&);
 void DayTwo(const Input<std::string>&);
 void DayThree(const Input<std::string>&);
 void DayFour();
 void DayFive(const Input<std::string>&);
+void DaySix(const std::string&);
 
 int main()
 {
@@ -33,14 +36,17 @@ int main()
 		DayThree(in);
 	}
 	{
-		std::cout << "\tDay 4\n";
+		std::cout << "\n\tDay 4\n";
 		DayFour();
 	}
 	{
-		std::cout << "\tDay 5\n";
+		std::cout << "\n\tDay 5\n";
 		Input<std::string> in("PuzzleInput/Day5Input.txt", '\0');
 		DayFive(in);
-
+	}
+	{
+		std::cout << "\n\tDay 6\n";
+		DaySix("PuzzleInput/Day6Input.txt");
 	}
 }
 
@@ -130,4 +136,38 @@ void DayFive(const Input<std::string>& in) {
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+}
+
+void DaySix(const std::string& path) {
+	std::ifstream infile("PuzzleInput/Day6Input.txt");
+
+	std::string answer;
+	std::vector<std::string> data;
+
+	for(std::string line; std::getline(infile, line); ) {
+		if (line.empty()) {
+			data.push_back(answer);
+			answer.clear();
+		}
+		if (infile.eof()) {
+			answer += line;
+			data.push_back(answer);
+		}
+		answer += line;
+		answer += " ";
+	}
+
+	std::cout << "\n";
+	auto start = std::chrono::high_resolution_clock::now();
+	unsigned long long int res = Day6::PartA(data);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
+
+	start = std::chrono::high_resolution_clock::now();
+	res = Day6::PartB(data);
+	end = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+
 }
