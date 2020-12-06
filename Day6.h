@@ -13,7 +13,7 @@ namespace Day6
 	int PartA(const std::vector<std::string>& data) {
 		int sum = 0;
 		std::set<char> answers;
-		for (const std::string& group : data) {
+		for (const auto& group : data) {
 			for(auto& answer : group) {
 				if (answer != ' ')
 					answers.insert(answer);
@@ -26,7 +26,7 @@ namespace Day6
 
 	int PartB(const std::vector<std::string>& data) {
 		int sum = 0;
-		for (auto group : data) {
+		for (const auto& group : data) {
 			std::istringstream iss(group);
 			int required = std::distance(std::istream_iterator<std::string>(iss), std::istream_iterator<std::string>());
 			std::unordered_map<char, int> answers;
