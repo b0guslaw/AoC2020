@@ -10,16 +10,19 @@
 #include "Day4.h"
 #include "Day5.h"
 #include "Day6.h"
+#include "Day7.h"
 
 void DayOne(const std::string);
 void DayTwo(const std::string);
 void DayThree(const std::string);
 void DayFour(const std::string);
 void DayFive(const std::string);
-void DaySix(const std::string&);
+void DaySix(const std::string);
+void DaySeven(const std::string);
 
 int main()
 {
+	/*
 	{
 		std::cout << "\tDay 1\n";
 		DayOne("PuzzleInput/Day1Input.txt");
@@ -43,6 +46,10 @@ int main()
 	{
 		std::cout << "\n\tDay 6\n";
 		DaySix("PuzzleInput/Day6Input.txt");
+	}*/
+		{
+		std::cout << "\n\tDay 7\n";
+		DaySeven("PuzzleInput/Day7Input.txt");
 	}
 }
 
@@ -122,7 +129,7 @@ void DayFive(const std::string path) {
 }
 
 void DaySix(const std::string& path) {
-	std::vector<std::string> data = Input::GetEmptyNewLineData("PuzzleInput/Day6Input.txt");
+	std::vector<std::string> data = Input::GetEmptyNewLineData(path);
 	auto start = std::chrono::high_resolution_clock::now();
 	unsigned long long int res = Day6::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
@@ -134,5 +141,19 @@ void DaySix(const std::string& path) {
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+}
 
+void DaySeven(const std::string path) {
+	std::vector<std::string> data = Input::GetStringData(path);
+	auto start = std::chrono::high_resolution_clock::now();
+	int res = Day7::PartA(data);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
+
+	start = std::chrono::high_resolution_clock::now();
+	res = Day7::PartB(data);
+	end = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }

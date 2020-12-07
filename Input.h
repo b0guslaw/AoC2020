@@ -56,6 +56,15 @@ namespace Input
 	}
 	return data;
 	}
+
+	std::vector<std::string> GetStringData(const std::string& path){
+		std::vector<std::string> data;
+		std::ifstream infile(path);
+		for(std::string line; std::getline(infile, line); ) {
+			data.push_back(line);
+		}
+		return data;
+	}
 };
 
 #endif
