@@ -22,7 +22,6 @@ void DaySeven(const std::string);
 
 int main()
 {
-	/*
 	{
 		std::cout << "\tDay 1\n";
 		DayOne("PuzzleInput/Day1Input.txt");
@@ -46,8 +45,8 @@ int main()
 	{
 		std::cout << "\n\tDay 6\n";
 		DaySix("PuzzleInput/Day6Input.txt");
-	}*/
-		{
+	}
+	{
 		std::cout << "\n\tDay 7\n";
 		DaySeven("PuzzleInput/Day7Input.txt");
 	}
@@ -128,7 +127,7 @@ void DayFive(const std::string path) {
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
 }
 
-void DaySix(const std::string& path) {
+void DaySix(const std::string path) {
 	std::vector<std::string> data = Input::GetEmptyNewLineData(path);
 	auto start = std::chrono::high_resolution_clock::now();
 	unsigned long long int res = Day6::PartA(data);
