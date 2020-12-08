@@ -4,33 +4,29 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <unordered_set>
 #include <algorithm>
 
 namespace Day8
 {
 
-	std::unordered_map<int, std::string> Run(const std::vector<std::string> data, int& acc) {
-		std::unordered_map<int, std::string> cache;
-		
+	bool Run(const std::vector<std::string> data, int& acc) {
+		std::vector<int> cache;
 		int offset = 1;
-		for (int i = 0; i < data.size(); i = (i + offset) % data.size()) {
+		for (int i = 0; i < data.size(); i = i + offset) {
 			offset = 1;
 			std::stringstream stream(data[i]);
 			std::string ins ,val;
 			stream >> ins >> val;
-			if (cache.find(i) == cache.end()) {
-				cache.emplace(i, ins);
+			if (std::find(cache.begin(), cache.end(), i) == cache.end()) {
+				cache.push_back(i);
 			} else {
-				return cache;
+				return false;
 			}
-
 			if (ins == "nop") continue;
 			if (ins == "acc") acc += std::stoi(val);
 			if (ins == "jmp") offset = std::stoi(val);
-
 		}
-		return cache;
+		return true;;
 	}
 	int PartA(const std::vector<std::string>& data) {
 		int acc = 0;
@@ -39,11 +35,30 @@ namespace Day8
 	}
 
 	int PartB(const std::vector<std::string>& data) {
-		int acc = 0;
-        
-		
+		int acc = 0, k = 0;
 
-		return 0;
+		std::vector<int> patches;
+		while(true) {
+			// make new data
+			auto newData = data;
+
+			// replace nop with jmp or jmp with nop, but only if the index is new
+			for (; k < newData.size(); k++) {
+				if(newData[k].starts_with("nop") && (std::find(patches.begin(), patches.end(), k) == patches.end()) ) {
+					newData[k].replace(0, 3, "jmp");
+					patches.push_back(k);
+					break;
+				}
+				if(newData[k].starts_with("jmp") && ( std::find( patches.begin(), patches.end(), k) == patches.end() ) ) {
+					newData[k].replace(0, 3, "nop");
+					patches.push_back(k);
+					break;
+				}
+			}
+			if (Run(newData, acc)) break;
+			acc = 0;
+		}
+		return acc;
 	}
 }
 
