@@ -13,9 +13,20 @@ using BagMap 	= std::unordered_map<std::string, BagList>;
 
 namespace Day7
 {
-	bool GoldHolder(BagList& list) {
-		for (auto& l : list) {
-			if (l.second == "shiny gold") return true;
+	std::unordered_set<std::string> gold;
+	bool CountBags(BagMap& bags, std::string bag) {
+		if (bags.find(bag) != bags.end()) {
+			for (auto b : bags.at(bag)) {
+				if (b.second == "shiny gold") {
+					gold.insert(bag);
+					return true;
+				}
+				if (CountBags(bags, b.second)) {
+					return gold.insert(bag).second;
+				} else {
+					return false;
+				}
+			}
 		}
 		return false;
 	}
@@ -27,6 +38,7 @@ namespace Day7
 			std::stringstream stream(entry);
 			std::string bagParent;
 			BagList children;
+
 			while (stream >> param1 >> param2 >> param3 >> skip) {
 				if (skip == "contain") {
 					bagParent = param1 + " " + param2;
@@ -51,7 +63,14 @@ namespace Day7
 	int PartA(const std::vector<std::string>& data) {
 		BagMap bags = ProcessInput(data);
 
-		return countGoldbags(bags, "shiny gold");
+		for (auto bag : bags) {
+			CountBags(bags, bag.first);
+		}
+
+		for (auto b : gold) {
+			std::cout << b << "\n";
+		}
+		return gold.size();
 	}
 
 	int PartB(const std::vector<std::string>& data) {
