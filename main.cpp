@@ -23,7 +23,7 @@ void Day7f(const std::string);
 void Day8f(const std::string);
 
 int main()
-{
+{	/*
 	std::cout << "\n\tDay 1\n"; Day1f("PuzzleInput/Day1Input.txt");
 	std::cout << "\n\tDay 2\n"; Day2f("PuzzleInput/Day2Input.txt");	
 	std::cout << "\n\tDay 3\n"; Day3f("PuzzleInput/Day3Input.txt");
@@ -31,6 +31,7 @@ int main()
 	std::cout << "\n\tDay 5\n"; Day5f("PuzzleInput/Day5Input.txt");
 	std::cout << "\n\tDay 6\n"; Day6f("PuzzleInput/Day6Input.txt");
 	std::cout << "\n\tDay 7\n"; Day7f("PuzzleInput/Day7Input.txt");
+	*/
 	std::cout << "\n\tDay 8\n"; Day8f("PuzzleInput/Day8Input.txt");
 }
 
