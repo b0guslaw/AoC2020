@@ -31,7 +31,7 @@ namespace Day8
 	int PartA(const std::vector<std::string>& data) {
 		int acc = 0;
 		Run(data, acc);
-        return acc;
+		return acc;
 	}
 
 	int PartB(const std::vector<std::string>& data) {
