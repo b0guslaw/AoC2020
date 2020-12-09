@@ -26,7 +26,7 @@ namespace Day8
 			if (ins == "acc") acc += std::stoi(val);
 			if (ins == "jmp") offset = std::stoi(val);
 		}
-		return true;;
+		return true;
 	}
 	int PartA(const std::vector<std::string>& data) {
 		int acc = 0;

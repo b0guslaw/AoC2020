@@ -1,7 +1,6 @@
 #ifndef DAY6
 #define DAY6
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <set>

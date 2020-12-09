@@ -1,7 +1,6 @@
 #ifndef DAY2
 #define DAY2
 
-#include <iostream>
 #include <string>
 #include <vector>
 #include <sstream>

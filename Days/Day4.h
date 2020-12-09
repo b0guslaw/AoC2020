@@ -3,9 +3,6 @@
 
 #include <regex>
 #include <vector>
-#include <iostream>
-#include <future>
-#include <thread>
 #include <algorithm>
 
 namespace Day4

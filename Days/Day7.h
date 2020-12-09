@@ -1,7 +1,6 @@
 #ifndef DAY7
 #define DAY7
 
-#include <iostream>
 #include <vector>
 #include <sstream>
 #include <unordered_map>

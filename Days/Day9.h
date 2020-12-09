@@ -2,12 +2,8 @@
 #define DAY9
 
 #include <vector>
-#include <iostream>
-#include <iterator>
 #include <unordered_map>
 #include <algorithm>
-
-using itr = std::vector<int>::const_iterator;
 
 namespace Day9
 {

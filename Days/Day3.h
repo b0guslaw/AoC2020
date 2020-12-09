@@ -3,7 +3,6 @@
 
 #include <unordered_set>
 #include <vector>
-#include <utility>
 
 namespace Day3
 {
