@@ -7,19 +7,10 @@
 #include <string>
 #include <utility>
 
-/**
- * This struct provides a simple and easy wrapper to import the contents of a file into
- * a std::vector. The ctor accepts one parameter and one optional parameter
- * Params: string to the path, (optional) char which delimiter to use
- * 
- * After calling the ctor, the public member data is accessible
- */
-
 namespace Input
 {
 	template<typename T>
-	std::vector<T> GetData(const std::string& path, char delim = ' ')
-	{
+	std::vector<T> GetData(const std::string& path, char delim = ' ') {
 		std::vector<T> data;
 		try {
 			std::ifstream infile(path);
@@ -36,25 +27,23 @@ namespace Input
 		return data;
 	}
 
-	std::vector<std::string> GetEmptyNewLineData(const std::string& path)
-	{
-	std::ifstream infile(path);
-	std::string temp;
-	std::vector<std::string> data;
-
-	for(std::string line; std::getline(infile, line); ) {
-		if (line.empty()) {
-			data.push_back(temp);
-			temp.clear();
-		}
-		if (infile.eof()) {
+	std::vector<std::string> GetEmptyNewLineData(const std::string& path) {
+		std::ifstream infile(path);
+		std::string temp;
+		std::vector<std::string> data;
+		for (std::string line; std::getline(infile, line); ) {
+			if (line.empty()) {
+				data.push_back(temp);
+				temp.clear();
+			}
+			if (infile.eof()) {
+				temp += line;
+				data.push_back(temp);
+			}
 			temp += line;
-			data.push_back(temp);
+			temp += " ";
 		}
-		temp += line;
-		temp += " ";
-	}
-	return data;
+		return data;
 	}
 
 	std::vector<std::string> GetStringData(const std::string& path){
