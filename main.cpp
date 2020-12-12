@@ -14,6 +14,7 @@
 #include "Days/Day8.h"
 #include "Days/Day9.h"
 #include "Days/Day10.h"
+#include "Days/Day11.h"
 
 void Day1f(const std::string);
 void Day2f(const std::string);
@@ -25,10 +26,11 @@ void Day7f(const std::string);
 void Day8f(const std::string);
 void Day9f(const std::string);
 void Day10f(const std::string);
+void Day11f(const std::string);
 
 int main()
 {
-	std::cout << "\n\tDay 1\n"; Day1f("PuzzleInput/Day1Input.txt");
+	/*std::cout << "\n\tDay 1\n"; Day1f("PuzzleInput/Day1Input.txt");
 	std::cout << "\n\tDay 2\n"; Day2f("PuzzleInput/Day2Input.txt");	
 	std::cout << "\n\tDay 3\n"; Day3f("PuzzleInput/Day3Input.txt");
 	std::cout << "\n\tDay 4\n"; Day4f("PuzzleInput/Day4Input.txt");
@@ -37,7 +39,8 @@ int main()
 	std::cout << "\n\tDay 7\n"; Day7f("PuzzleInput/Day7Input.txt");
 	std::cout << "\n\tDay 8\n"; Day8f("PuzzleInput/Day8Input.txt");
 	std::cout << "\n\tDay 9\n"; Day9f("PuzzleInput/Day9Input.txt");
-	std::cout << "\n\tDay 10\n"; Day10f("PuzzleInput/Day10Input.txt");
+	std::cout << "\n\tDay 10\n"; Day10f("PuzzleInput/Day10Input.txt");*/
+	std::cout << "\n\tDay 11\n"; Day11f("PuzzleInput/Day11Input.txt");
 }
 
 void Day1f(const std::string path) {
@@ -187,6 +190,21 @@ void Day10f(const std::string path) {
 
 	start = std::chrono::high_resolution_clock::now();
 	res = Day10::PartB(data);
+	end = std::chrono::high_resolution_clock::now();
+	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
+}
+
+void Day11f(const std::string path) {
+	std::vector<std::string> data = Input::GetStringData(path);
+	auto start = std::chrono::high_resolution_clock::now();
+	int res = Day11::PartA(data);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
+
+	start = std::chrono::high_resolution_clock::now();
+	res = Day11::PartB(data);
 	end = std::chrono::high_resolution_clock::now();
 	duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part B: " << res <<" found after " << duration << "µs\n";
