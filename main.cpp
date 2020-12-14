@@ -234,7 +234,7 @@ void Day12f(const std::string path) {
 void Day13f(const std::string path) {
 	std::vector<std::string> data = Input::GetStringData(path);
 	auto start = std::chrono::high_resolution_clock::now();
-	int res = Day13::PartA(data);
+	std::uint64_t res = Day13::PartA(data);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	std::cout << "Part A: " << res <<" found after " << duration << "µs\n";
