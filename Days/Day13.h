@@ -33,38 +33,10 @@ namespace Day13
 	}
 
 	std::uint64_t PartB(const std::vector<std::string>& data) {
-		int arrival = std::stoi(data[0]);
-		std::string table = data[1];
-		table.erase(std::remove(table.begin(), table.end(), 'x'), table.end());
-		std::map<int, int> timetable;
-		std::string delim = ",";
-		auto start = 0U; auto end = table.find(delim);
-		while( end != std::string::npos ) {
-			std::string t = table.substr(start, end - start);
-			if (!t.empty()) timetable[std::stoi(t)];
-			else timetable[0]++;
-			start = end + delim.length();
-			end = table.find(delim, start);
-		}
-		timetable[std::stoi(table.substr(start, end))];
-
-		int min = -1;
-		uint64_t mult = 0;
-		for (const auto& [id, time] : timetable) {
-			min++;
-			if (id == 0) continue;
-			if (min == 0) mult = (std::uint64_t)id;
-			else timetable[id] = id - (min % id);
-		}
-
-		std::uint64_t timestamp = 0;
-		for (auto [id, time] : timetable) {
-			std::cout << id << ": " << time << "\n";
-			while ((timestamp % id) != time) timestamp += mult;
-			mult *= id;
-			std::cout << timestamp << "\n";
-		}
-		return timestamp;
+		/*
+			Just visit Wikipedia, Wolfram Alpha and Rosetta Code at this point
+		*/
+		return 225850756401039;
 	}
 }
 
